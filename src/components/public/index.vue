@@ -1,63 +1,71 @@
 <template>
     <div id="app" class="row">
-        <div class="sidebar col-md-2">
-            <p>后台管理系统</p>
+        <div class="con"><img src="../../assets/images/logo.png" alt="" style="width: 100%;"/></div>
+        <div class="sidebar col-md-2 trans">
+            <p class="sp">后台管理系统</p>
             <ul class="ul">
                 <li>
-                    <router-link to="/index/" tag="a" class="check"><i class="glyphicon glyphicon-home"></i>首页
+                    <router-link to="/index/" tag="a" class="check"><i
+                            class="glyphicon glyphicon-home"></i><span>首页</span>
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/index/menu" tag="a"><i class="glyphicon glyphicon-menu-hamburger"></i>最新菜单
+                    <router-link to="/index/menu" tag="a"><i
+                            class="glyphicon glyphicon-menu-hamburger"></i><span>最新菜单</span>
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/index/appreciate" tag="a"><i class="glyphicon glyphicon-eye-open"></i>菜品欣赏
+                    <router-link to="/index/appreciate" tag="a"><i
+                            class="glyphicon glyphicon-eye-open"></i><span>菜品欣赏</span>
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/index/about" tag="a"><i class="glyphicon glyphicon-user"></i>关于我们</router-link>
-                </li>
-                <li>
-                    <router-link to="/index/relation" tag="a"><i class="glyphicon glyphicon-earphone"></i>联系我们
+                    <router-link to="/index/about" tag="a"><i class="glyphicon glyphicon-user"></i><span>关于我们</span>
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/index/online" tag="a"><i class="glyphicon glyphicon-flash"></i>在线订座</router-link>
+                    <router-link to="/index/relation" tag="a"><i
+                            class="glyphicon glyphicon-earphone"></i><span>联系我们</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/index/online" tag="a"><i class="glyphicon glyphicon-flash"></i><span>在线订座</span>
+                    </router-link>
                 </li>
             </ul>
         </div>
-        <div class="col-md-2"></div>
-        <div class="content col-md-10">
+        <div class="spc col-md-2 trans"></div>
+        <div class="content col-md-10 trans">
             <div class="nav">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                <a class="glyphicon glyphicon-th-list" href="javascript:;"></a>
+                <div class="spc_nav col-md-2 trans"></div>
+                <div class="con_nav col-md-10 trans">
+                    <a class="glyphicon glyphicon-th-list" href="javascript:;"></a>
 
-                <div class="nav_con ri">
-                    <div class="user">
-                        <div class="user_img le"><img src="../../assets/images/user.jpg" alt=""/></div>
-                        <span>开发人员</span>
-                        <i class="glyphicon glyphicon-triangle-bottom"
-                           style="color: #979898;font-size: 8px;transform: scale(0.7);"></i>
+                    <div class="nav_con ri">
+                        <div class="user">
+                            <div class="user_img le"><img src="../../assets/images/user.jpg" alt=""/></div>
+                            <span>开发人员</span>
+                            <i class="glyphicon glyphicon-triangle-bottom"
+                               style="color: #979898;font-size: 8px;transform: scale(0.7);"></i>
 
-                        <div class="list">
-                            <ul>
-                                <li><i class="glyphicon glyphicon-cog"></i>个人设置</li>
-                                <li @click="click()"><i class="glyphicon glyphicon-log-in"></i>退出登陆</li>
-                            </ul>
+                            <div class="list">
+                                <ul>
+                                    <li><i class="glyphicon glyphicon-cog"></i>个人设置</li>
+                                    <li @click="click()"><i class="glyphicon glyphicon-log-in"></i>退出登陆</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
-            <router-view></router-view>
+            <div class="container-fluid">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {checked} from '../../assets/js/index.js'
     export default {
         data ()
     {
@@ -66,9 +74,78 @@
         }
     }
     ,
+    mounted:function () {
+        var flag = true;
+        var gicon = document.querySelector('.glyphicon-th-list');
+        var sidebar = document.querySelector('.sidebar');
+        var ul = document.querySelector('.ul');
+        var sp = document.querySelector('.sp');
+        var uLi = ul.querySelectorAll('a');
+        gicon.onclick = function () {
+            if (flag) {
+                function cla(old, wid) {
+                    var s = document.querySelector('.' + old);
+                    s.className = old + ' ' + wid + ' trans';
+                }
+
+                cla('sidebar', 'col-md-1');
+                cla('spc', 'col-md-1');
+                cla('content', 'col-md-11');
+                cla('con_nav', 'col-md-11');
+                cla('spc_nav', 'col-md-1');
+                sidebar.style.minWidth = "115px";
+                for (var i = 0; i < uLi.length; i++) {
+                    var liSpan = uLi[i].querySelector('span');
+                    var liI = uLi[i].querySelector('i');
+                    liSpan.style.display = "none";
+                    liI.style.marginLeft = "23px";
+                }
+                sp.innerHTML = '后台硬'
+            } else {
+                function cle(old, wid) {
+                    var s = document.querySelector('.' + old);
+                    s.className = old + ' ' + wid + ' trans';
+                }
+
+                cle('sidebar', 'col-md-2');
+                cle('spc', 'col-md-2');
+                cle('content', 'col-md-10');
+                cle('con_nav', 'col-md-10');
+                cle('spc_nav', 'col-md-2');
+                sidebar.style.minWidth = "230px";
+                for (var i = 0; i < uLi.length; i++) {
+                    var liSpan = uLi[i].querySelector('span');
+                    var liI = uLi[i].querySelector('i');
+                    liSpan.style.display = "inline-block";
+                    liI.style.marginLeft = "0";
+                }
+                sp.innerHTML = '后台管理系统'
+            }
+            flag = !flag;
+        };
+
+        var ls = window.localStorage;
+        if (!ls.num) ls.num = 0;
+        for (let i = 0; i < uLi.length; i++) {
+            uLi[i].onclick = function () {
+                for (var s = 0; s < uLi.length; s++) {
+                    uLi[s].className = '';
+                }
+                this.className = 'check';
+                ls.num = i;
+            }
+        }
+        window.onload = function () {
+            for (var s = 0; s < uLi.length; s++) {
+                uLi[s].className = '';
+            }
+            uLi[ls.num].className = 'check';
+        }
+    }
+    ,
     methods:{
-        click:function(){
-                this.$router.push({path:'/'});
+        click:function () {
+            this.$router.push({path: '/'});
         }
     }
     }
@@ -87,6 +164,23 @@
         height: 100vh;
     }
 
+    .trans {
+        transition: 0.35s;
+    }
+
+    .con {
+        width: 120px;
+        position: fixed;
+        top: 5px;
+        left: 50%;
+        margin-left: -60px;
+        z-index: 100;
+    }
+
+    .con img {
+        width: 100%;
+    }
+
     .sidebar {
         background-color: #1a2942;
         font-family: glyphicons;
@@ -95,6 +189,7 @@
         top: 0;
         padding: 0;
         z-index: 6;
+        min-width: 230px;
     }
 
     .sidebar p {
@@ -129,6 +224,7 @@
     .content {
         position: relative;
     }
+
     .content .nav {
         padding-left: 25px;
         padding-right: 25px;
@@ -136,9 +232,10 @@
         box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
         position: fixed;
         top: 0;
-        left: 0;
+        right: 0;
         width: 100%;
         z-index: 5;
+        background-color: #fff;
     }
 
     .content .nav a {
@@ -210,5 +307,9 @@
 
     .user_img img {
         width: 100%;
+    }
+
+    .content .container-fluid {
+        padding-top: 60px;
     }
 </style>
